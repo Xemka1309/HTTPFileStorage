@@ -34,7 +34,7 @@
             this.changeFilePOSTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteFileDELETEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCOPYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyFileCopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonconnect = new System.Windows.Forms.Button();
             this.textBoxuri = new System.Windows.Forms.TextBox();
             this.labeluri = new System.Windows.Forms.Label();
@@ -44,7 +44,8 @@
             this.textBoxfilecontent = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.copyFileCopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxselectedfile = new System.Windows.Forms.TextBox();
+            this.labelselectedfile = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,6 @@
             this.changeFilePOSTToolStripMenuItem,
             this.deleteFileDELETEToolStripMenuItem,
             this.downloadCOPYToolStripMenuItem,
-            this.moveFileToolStripMenuItem,
             this.copyFileCopyToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -67,29 +67,29 @@
             // readFileGETToolStripMenuItem
             // 
             this.readFileGETToolStripMenuItem.Name = "readFileGETToolStripMenuItem";
-            this.readFileGETToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.readFileGETToolStripMenuItem.Text = "Read file(GET)";
+            this.readFileGETToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.readFileGETToolStripMenuItem.Text = "Read file";
             this.readFileGETToolStripMenuItem.Click += new System.EventHandler(this.readFileGETToolStripMenuItem_Click);
             // 
             // addFilePUTToolStripMenuItem
             // 
             this.addFilePUTToolStripMenuItem.Name = "addFilePUTToolStripMenuItem";
-            this.addFilePUTToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.addFilePUTToolStripMenuItem.Text = "Add file(PUT)";
+            this.addFilePUTToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.addFilePUTToolStripMenuItem.Text = "Add file";
             this.addFilePUTToolStripMenuItem.Click += new System.EventHandler(this.addFilePUTToolStripMenuItem_Click);
             // 
             // changeFilePOSTToolStripMenuItem
             // 
             this.changeFilePOSTToolStripMenuItem.Name = "changeFilePOSTToolStripMenuItem";
-            this.changeFilePOSTToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
-            this.changeFilePOSTToolStripMenuItem.Text = "Change file(POST)";
+            this.changeFilePOSTToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.changeFilePOSTToolStripMenuItem.Text = "Change file";
             this.changeFilePOSTToolStripMenuItem.Click += new System.EventHandler(this.changeFilePOSTToolStripMenuItem_Click);
             // 
             // deleteFileDELETEToolStripMenuItem
             // 
             this.deleteFileDELETEToolStripMenuItem.Name = "deleteFileDELETEToolStripMenuItem";
-            this.deleteFileDELETEToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
-            this.deleteFileDELETEToolStripMenuItem.Text = "Delete File(DELETE)";
+            this.deleteFileDELETEToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.deleteFileDELETEToolStripMenuItem.Text = "Delete File";
             this.deleteFileDELETEToolStripMenuItem.Click += new System.EventHandler(this.deleteFileDELETEToolStripMenuItem_Click);
             // 
             // downloadCOPYToolStripMenuItem
@@ -99,11 +99,12 @@
             this.downloadCOPYToolStripMenuItem.Text = "Download file";
             this.downloadCOPYToolStripMenuItem.Click += new System.EventHandler(this.copyFileCOPYToolStripMenuItem_Click);
             // 
-            // moveFileToolStripMenuItem
+            // copyFileCopyToolStripMenuItem
             // 
-            this.moveFileToolStripMenuItem.Name = "moveFileToolStripMenuItem";
-            this.moveFileToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.moveFileToolStripMenuItem.Text = "Move file(MOVE)";
+            this.copyFileCopyToolStripMenuItem.Name = "copyFileCopyToolStripMenuItem";
+            this.copyFileCopyToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.copyFileCopyToolStripMenuItem.Text = "Copy file";
+            this.copyFileCopyToolStripMenuItem.Click += new System.EventHandler(this.copyFileCopyToolStripMenuItem_Click_1);
             // 
             // buttonconnect
             // 
@@ -137,7 +138,7 @@
             // labelcontent
             // 
             this.labelcontent.AutoSize = true;
-            this.labelcontent.Location = new System.Drawing.Point(86, 34);
+            this.labelcontent.Location = new System.Drawing.Point(12, 41);
             this.labelcontent.Name = "labelcontent";
             this.labelcontent.Size = new System.Drawing.Size(62, 13);
             this.labelcontent.TabIndex = 10;
@@ -176,17 +177,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // copyFileCopyToolStripMenuItem
+            // textBoxselectedfile
             // 
-            this.copyFileCopyToolStripMenuItem.Name = "copyFileCopyToolStripMenuItem";
-            this.copyFileCopyToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
-            this.copyFileCopyToolStripMenuItem.Text = "Copy file(Copy)";
+            this.textBoxselectedfile.Location = new System.Drawing.Point(108, 38);
+            this.textBoxselectedfile.Name = "textBoxselectedfile";
+            this.textBoxselectedfile.Size = new System.Drawing.Size(160, 20);
+            this.textBoxselectedfile.TabIndex = 14;
+            this.textBoxselectedfile.Text = "\r\n";
+            // 
+            // labelselectedfile
+            // 
+            this.labelselectedfile.AutoSize = true;
+            this.labelselectedfile.Location = new System.Drawing.Point(150, 22);
+            this.labelselectedfile.Name = "labelselectedfile";
+            this.labelselectedfile.Size = new System.Drawing.Size(65, 13);
+            this.labelselectedfile.TabIndex = 15;
+            this.labelselectedfile.Text = "Selected file";
             // 
             // ClienForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelselectedfile);
+            this.Controls.Add(this.textBoxselectedfile);
             this.Controls.Add(this.textBoxfilecontent);
             this.Controls.Add(this.labelfiles);
             this.Controls.Add(this.listViewfiles);
@@ -213,7 +227,6 @@
         private System.Windows.Forms.ToolStripMenuItem changeFilePOSTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteFileDELETEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadCOPYToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem moveFileToolStripMenuItem;
         private System.Windows.Forms.Button buttonconnect;
         private System.Windows.Forms.TextBox textBoxuri;
         private System.Windows.Forms.Label labeluri;
@@ -224,5 +237,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem copyFileCopyToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxselectedfile;
+        private System.Windows.Forms.Label labelselectedfile;
     }
 }

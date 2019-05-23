@@ -75,13 +75,19 @@ namespace file_storage_client
             openFileDialog1.ShowDialog();
             String pass = openFileDialog1.FileName;
             String[] trimedstr = pass.Split('\\');
+            byte[] filecontent;
+            FileStream fs = new FileStream(pass, FileMode.Open);
+            filecontent = new byte[fs.Length];
+            fs.Read(filecontent, 0, filecontent.Length);
+            fs.Dispose();
+            
             MessageBox.Show(pass);
             try
             {
                 client.CreateRequest();
                 client.SetRequestMethod(HttpMethods.PUT);
                 client.SetRequestUri(trimedstr[trimedstr.Length - 1]);
-                HttpResponseMessage responseMessage = client.SendRequest(Encoding.UTF8.GetBytes(pass));
+                HttpResponseMessage responseMessage = client.SendRequest(filecontent);
                 //MessageBox.Show(responseMessage.Content.ReadAsStringAsync().Result);
 
             }
@@ -142,6 +148,7 @@ namespace file_storage_client
         private void listViewfiles_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             selectedfilename = e.Item.Text;
+            textBoxselectedfile.Text = selectedfilename;
         }
 
         private void changeFilePOSTToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,6 +231,45 @@ namespace file_storage_client
                 MessageBox.Show("Server not answer");
             }
             
+        }
+
+        private void copyFileCopyToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            DFormCopy dForm = new DFormCopy();
+            dForm.Owner = this;
+            
+            dForm.ShowDialog();
+            if (dForm.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    client.CreateRequest();
+                    client.SetRequestMethod(HttpMethods.COPY);
+                    client.SetRequestUri(selectedfilename);
+                    MessageBox.Show(client.SendRequest(Encoding.UTF8.GetBytes(dForm.textBox1.Text)).Content.ReadAsStringAsync().Result);
+                    String str = String.Empty;
+                    try
+                    {
+                        str = client.GetFilesNames();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Server is not active");
+                    }
+
+                    List<String> filenames = new List<string>();
+                    listViewfiles.Items.Clear();
+                    String[] files = str.Split('/');
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        listViewfiles.Items.Add(files[i]);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Server not answer");
+                }
+            }
         }
     }
 }

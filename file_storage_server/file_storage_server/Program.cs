@@ -25,30 +25,40 @@ namespace file_storage_server
 
         static void Main(string[] args)
         {
-           // listener = new HttpListener();
+            // listener = new HttpListener();
             //listener.Prefixes.Add("http://localhost:8888/file_storage/");
             //listener.Start();
-           // Console.WriteLine("Server is up");
+            // Console.WriteLine("Server is up");
             //HttpListenerContext context = listener.GetContext();
             //HttpListenerRequest request = context.Request;
             //Console.WriteLine("method:" + request.HttpMethod);
             //Console.WriteLine("raw uri:" + request.RawUrl);
-           // HttpListenerResponse response = context.Response;
+            // HttpListenerResponse response = context.Response;
 
             //string responseStr = "<html><head><meta charset='utf8'></head><body>Привет мир!</body></html>";
             //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
             //получаем поток ответа и пишем в него ответ
-           // response.ContentLength64 = buffer.Length;
-           // Stream output = response.OutputStream;
-           // output.Write(buffer, 0, buffer.Length);
+            // response.ContentLength64 = buffer.Length;
+            // Stream output = response.OutputStream;
+            // output.Write(buffer, 0, buffer.Length);
             //закрываем поток
-           // output.Close();
+            // output.Close();
 
 
             //listener.Stop();
-
-
-            Server server = new Server("http://localhost:8888/file_storage/", "USERS_DIRS");
+            Server server=new Server("http://localhost:8888/file_storage/", "USERS_DIRS");
+            String useruri=Console.ReadLine();
+            try
+            {
+                if (useruri=="std")
+                    server = new Server("http://localhost:8888/file_storage/", "USERS_DIRS");
+            }
+            catch
+            {
+                Console.WriteLine("wrong uri");
+                return;
+            }
+            
             server.StartListening();
             int handlerscount = 0;
             while (handlerscount<5)
@@ -214,6 +224,27 @@ namespace file_storage_server
             }
                 
         }
+        public Boolean CopyFile(String newfilename,String filepass,String oldpass)
+        {
+            try
+            {
+
+                filebase.AddFile(newfilename, filepass);
+                FileStream fileStreambuff = new FileStream(oldpass, FileMode.Open);
+                byte[] filebytes=new byte[fileStreambuff.Length];
+                fileStreambuff.Read(filebytes, 0, (int)fileStreambuff.Length);
+                //fileStreambuff.Close;
+                fileStreambuff.Dispose();
+                FileStream fileStream = new FileStream(filepass, FileMode.Create);
+                fileStream.Write(filebytes, 0, filebytes.Length);
+                fileStream.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public byte[] GetFileBytes(String filename)
         {
             byte[] result;
@@ -331,19 +362,21 @@ namespace file_storage_server
                     }
                     break;
                 case "COPY":
-                    if (requestresult[1] == "ALL")
+                    String newfilename = Encoding.UTF8.GetString(requestcontent);
+                    result = CopyFile(newfilename, filebase.dirpass + "/" + newfilename, filebase.dirpass + "/" +requestresult[1]);
+
+                    if (!result)
                     {
-                        SendResponse(Encoding.UTF8.GetBytes(filebase.GetAllFilesNames()), context);
+                        SendResponse("Can't copy file", context);
                     }
                     else
                     {
-                        if (GetFileBytes(requestresult[1]) != null)
-                            SendResponse(GetFileBytes(requestresult[1]), context);
-                        else
-                            SendResponse("file not found", context);
+                        SendResponse("File copy sucsessfully", context);
                     }
 
+
                     break;
+                   
             }
             filebase.Refresh();
 

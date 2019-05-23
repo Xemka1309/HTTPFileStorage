@@ -73,6 +73,12 @@
     <Compile Include="ClienForm.Designer.cs">
       <DependentUpon>ClienForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DFormCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DFormCopy.Designer.cs">
+      <DependentUpon>DFormCopy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ClienForm.resx">
       <DependentUpon>ClienForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DFormCopy.resx">
+      <DependentUpon>DFormCopy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
